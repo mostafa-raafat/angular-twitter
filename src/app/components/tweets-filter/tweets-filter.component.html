@@ -1,0 +1,15 @@
+<div class="tweets__search">
+  <label for="search" class="tweets__search-label">
+    {{ searchKey | titlecase }} search
+  </label>
+  <div class="input-group col-sm-6 col-md-4 tweets__search-input">
+    <input type="text" id="search" class="form-control py-2 border-right-0 border"
+      placeholder="Search by {{ searchKey | titlecase }}" autocomplete="off" #searchInput [(ngModel)]="searchValue">
+    <span class="input-group-append tweets__search-icon">
+      <button class="btn btn-outline-secondary border-left-0 border" type="button">
+        <i class="fa fa-search" *ngIf="searchValue === '' || loadingTweets === false"></i>
+        <i class="fa fa-spinner fa-pulse" *ngIf="searchValue !== '' && loadingTweets === true"></i>
+      </button>
+    </span>
+  </div>
+</div>

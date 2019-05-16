@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -8,16 +8,34 @@ import { Observable } from 'rxjs/internal/Observable';
 
 export class ApiService {
 
-  private url = 'https://jsonplaceholder.typicode.com/photos';
+  private url = 'https://am-twitter-scrape.herokuapp.com/';
+  private httpOptions: any;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }),
+      params: new HttpParams({
+        fromObject: {
+          pages_limit: '3',
+          wait: '0',
+        }
+      })
+    };
+  }
 
   /**
-   * getProducts: Get All Products.
+   *  Get tweets by user or hashtag
+   *
+   * @param {string} key
+   * @param {string} value
    * @returns {Observable<any>}
+   * @memberof ApiService
    */
-  getProducts(): Observable<any> {
-    return this.httpClient.get(this.url);
+  getTweets(key: string, value: string): Observable<any> {
+    return this.httpClient.get(this.url + key + 's/' + value, this.httpOptions);
   }
 
 }

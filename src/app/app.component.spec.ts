@@ -1,18 +1,27 @@
 import { HttpClientModule } from '@angular/common/http';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbPaginationModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './components/products/products.component';
-import { MaterialModule } from './material/material.module';
+import { TweetsComponent } from './components/tweets/tweets.component';
+import { DatePipe } from './Pipes/Date.pipe';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        ProductsComponent
+        TweetsComponent,
+        DatePipe
       ],
-      imports: [MaterialModule, ReactiveFormsModule, FormsModule, HttpClientModule]
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        NgbPaginationModule,
+        NgbTabsetModule
+      ]
     }).compileComponents();
   }));
 

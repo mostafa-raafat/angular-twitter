@@ -1,9 +1,15 @@
-
-<div class="container">
-  <mat-toolbar>
-      <span class="row"></span>
-      <span>Code-Challenge-3</span>
-      <span class="row"></span>
-  </mat-toolbar>
-  <app-products></app-products>
+<div class="container-fluid">
+  <h4 class="app-title">Angular Twitter</h4>
+  <ngb-tabset (tabChange)="tabChanged($event)">
+    <ngb-tab title="Hashtag search" id="hashtag">
+      <ng-template ngbTabContent>
+        <app-tweets [searchKey]="tabId"></app-tweets>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="User search" id="user">
+      <ng-template ngbTabContent>
+        <app-tweets [searchKey]="tabId"></app-tweets>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
 </div>

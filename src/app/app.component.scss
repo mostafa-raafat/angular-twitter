@@ -2,11 +2,48 @@
  *  Style App Component Container  *
 ***********************************/
 
-.container {
-  margin: 0px 40px;
-  .row {
-    flex: 1 1 auto;
-  }
+
+.app-title {
+    margin: 0 3%;
+    padding: 20px 0;
 }
 
 
+
+/******************************************
+ *      Style Angular Bootstrap Tabs     *
+*****************************************/
+
+::ng-deep .nav-tabs {
+    width: 94%;
+    margin: 0 3%;
+    border: none;
+}
+
+::ng-deep .nav-item a {
+    color: #000000;
+}
+
+::ng-deep .nav-tabs .nav-link.active {
+    color: #3ec1e4;
+    border: none;
+    background: #f8f8fa;
+    border-bottom: 1px solid #f8f8fa;
+    border-radius: 0;
+}
+
+::ng-deep .nav-tabs .nav-link.active,
+::ng-deep .nav-tabs .nav-link:hover,
+::ng-deep .nav-tabs .nav-link {
+    border: none;
+}
+
+::ng-deep .tab-content {
+    background: #f8f8fa;
+    padding: 0 4% 8% 4%;
+    height: 100%;
+}
+
+::ng-deep .pagination {
+    margin: 35px 10px 20px 10px;
+}

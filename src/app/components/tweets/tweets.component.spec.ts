@@ -5,43 +5,50 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
-import { MaterialModule } from 'src/app/material/material.module';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { TweetsComponent } from './tweets.component';
 import { ApiService } from 'src/app/services/api.service';
-import { ProductsComponent } from './products.component';
+import { DatePipe } from '../../Pipes/Date.pipe';
 
-
-describe('ProductsComponent', () => {
-  let component: ProductsComponent;
-  let fixture: ComponentFixture<ProductsComponent>;
+describe('TweetsComponent', () => {
+  let component: TweetsComponent;
+  let fixture: ComponentFixture<TweetsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProductsComponent],
-      imports: [MaterialModule, ReactiveFormsModule, FormsModule, HttpClientModule, BrowserAnimationsModule],
+      declarations: [TweetsComponent, DatePipe],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        NgbPaginationModule
+      ],
       providers: [ApiService]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductsComponent);
+    fixture = TestBed.createComponent(TweetsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create tweets component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set productSubscription and listData', () => {
+  it('should set hashtagSubscription and listData', () => {
     const apiService = fixture.debugElement.injector.get(ApiService);
     const httpCommonResponse = [{ name: 'mostafa' }];
-    const spyService = spyOn(apiService, 'getProducts').and.callFake(() => {
+    const spyService = spyOn(apiService, 'getTweets').and.callFake(() => {
       return of(httpCommonResponse);
     });
     component.ngOnInit();
     expect(component.listData).toBeDefined();
-    expect(component.productSubscription).toBeDefined();
+    expect(component.hashtagSubscription).toBeDefined();
     component.ngOnDestroy();
   });
 

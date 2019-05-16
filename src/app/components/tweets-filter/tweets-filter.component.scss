@@ -1,0 +1,49 @@
+.tweets__search {
+  padding: 27px 0;
+
+  .tweets__search-label {
+    display: block;
+    width: 150px;
+    padding: 0;
+    color: #8c8989;
+    margin-bottom: 0.2rem;
+  }
+
+  .tweets__search-input {
+    padding-left: 0;
+
+    input {
+      height: 50px;
+      border-radius: 0;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .tweets__search-icon {
+    margin-right: 15px;
+    button {
+      width: 50px;
+      border-radius: 0;
+      background: #fff;
+
+      &:hover {
+        cursor: default;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      .fa-search {
+        color: #cecece;
+      }
+    }
+  }
+}
