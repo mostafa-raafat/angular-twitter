@@ -3,12 +3,12 @@
   <ngb-tabset (tabChange)="tabChanged($event)">
     <ngb-tab title="Hashtag search" id="hashtag">
       <ng-template ngbTabContent>
-        <app-tweets [searchKey]="tabId"></app-tweets>
+        <app-tweets [tabId]="tabId"></app-tweets>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="User search" id="user">
       <ng-template ngbTabContent>
-        <app-tweets [searchKey]="tabId"></app-tweets>
+        <app-tweets [tabId]="tabId"></app-tweets>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

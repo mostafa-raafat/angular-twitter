@@ -1,7 +1,7 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
+import { Tweet, TabsId } from './tweet';
 
 @Component({
   selector: 'app-tweets',
@@ -9,78 +9,101 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./tweets.component.scss']
 })
 
-export class TweetsComponent implements OnInit, OnDestroy {
+export class TweetsComponent implements OnDestroy {
 
-  @Input() searchKey: string;
-  @ViewChild('searchInput') searchInput: ElementRef;
+  @Input() tabId: string;
 
   public searchValue = '';
-  public page = 1;
-  public pageSize = 10;
-  public tweetsSize = 0;
-  public loadingTweets = false;
-  public tweets: any[];
-  public tweetsList: any[];
+  public loadingIcon = false;
+  public tweetsList: Tweet[] = [];
 
   private tweetsSubscription: Subscription;
-  private filterSubscription: Subscription;
 
   constructor(private api: ApiService) {}
 
-  ngOnInit() {
-    this.filterSubscription = fromEvent(this.searchInput.nativeElement, 'keyup')
-    .pipe(
-      // Time in milliseconds between key events.
-      debounceTime(500),
-      // If previous query is different from current.
-      distinctUntilChanged(),
-      // Get search input.
-      map((search: any) => search.target.value)
-      // subscription for response
-    ).subscribe((text: string) => this.searchTweets(text));
-  }
-
   /**
-   * Filter Data From The Table.
+   * Get Tweets Based On User Input.
+   *
+   * @param {string} value
+   * @memberof TweetsComponent
    */
   searchTweets(value: string) {
-    this.loadingTweets = true;
+    this.searchValue = value;
+    this.loadingIcon = true;
     if (value !== '') {
-      this.tweetsSubscription = this.api.getTweets(this.searchKey, value)
+      this.tweetsSubscription = this.api.getTweets(this.tabId, this.removeHash(this.searchValue))
       .subscribe((list: any) => {
-        this.loadingTweets = false;
-        this.tweetsSize = list.length;
-        this.tweetsList = list;
-        this.paginate(this.page);
+        this.loadingIcon = false;
+        this.tweetsList = this.exactMatch(list, this.tabId);
       });
     } else {
-      this.tweets = [];
       this.tweetsList = [];
-      this.tweetsSize = 0;
     }
-
   }
-
-  exactUserMatching(tweets, key): any {
-    tweets.filter(user => user.account.fullname === key);
-  }
-
-  exactHashtagMatching(tweets, key): any {
-    tweets.filter(user => user.hashtags === key);
-  }
-
-  paginate(page: number): void {
-    this.tweets = this.tweetsList.slice((page - 1) * this.pageSize, (page - 1) * this.pageSize + this.pageSize);
-  }
-
 
   /**
-   * Unsubscribe From Observables.
+   * Filter By Exact Matching.
+   *
+   * @param {Tweet[]} tweets
+   * @param {string} tabId
+   * @returns {Tweet[]}
+   * @memberof TweetsComponent
+   */
+  exactMatch(tweets: Tweet[], tabId: string): Tweet[] {
+    if (tabId === TabsId.hashtag) {
+      return this.exactHashtagMatching(tweets, this.searchValue);
+    } else if (tabId === TabsId.user) {
+      return this.exactUserMatching(tweets, this.searchValue);
+    }
+  }
+
+  /**
+   * Remove Hash For API Call.
+   *
+   * @param {string} searchValue
+   * @returns {string}
+   * @memberof TweetsComponent
+   */
+  removeHash(searchValue: string): string {
+    if (this.tabId === TabsId.hashtag && searchValue.startsWith('#')) {
+      return this.searchValue.slice(1);
+    } else {
+      return searchValue;
+    }
+  }
+
+  /**
+   * Filter Users By Exact Matching.
+   *
+   * @param {Tweet[]} tweets
+   * @param {string} searchValue
+   * @returns {Tweet[]}
+   * @memberof TweetsComponent
+   */
+  exactUserMatching(tweets: Tweet[], searchValue: string): Tweet[] {
+    return tweets.filter(user => user.account.href.slice(1) === searchValue);
+  }
+
+  /**
+   * Filter Hashtags By Exact Matching.
+   *
+   * @param {Tweet[]} tweets
+   * @param {string} searchValue
+   * @returns {Tweet[]}
+   * @memberof TweetsComponent
+   */
+  exactHashtagMatching(tweets: Tweet[], searchValue: string): Tweet[] {
+    return tweets.filter(user => user.hashtags.includes(searchValue));
+  }
+
+  /**
+   * Unsubscribe On Component Destroy.
+   *
+   * @memberof TweetsComponent
    */
   ngOnDestroy() {
     if (this.tweetsSubscription) {
       this.tweetsSubscription.unsubscribe();
     }
-    this.filterSubscription.unsubscribe();
   }
 }

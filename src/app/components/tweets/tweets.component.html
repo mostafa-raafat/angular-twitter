@@ -1,60 +1,14 @@
 <section class="tweets">
 
-  <div class="tweets__search">
-    <label for="search" class="tweets__search-label">
-      {{ searchKey | titlecase }} search
-    </label>
-    <div class="input-group col-sm-6 col-md-4 tweets__search-input">
-      <input type="text" id="search" class="form-control py-2 border-right-0 border"
-        placeholder="Search by {{ searchKey | titlecase }}" autocomplete="off" #searchInput [(ngModel)]="searchValue">
-      <span class="input-group-append tweets__search-icon">
-        <button class="btn btn-outline-secondary border-left-0 border" type="button">
-          <i class="fa fa-search" *ngIf="searchValue === '' || loadingTweets === false"></i>
-          <i class="fa fa-spinner fa-pulse" *ngIf="searchValue !== '' && loadingTweets === true"></i>
-        </button>
-      </span>
-    </div>
-  </div>
+  <app-tweets-filter 
+  [tabId]="tabId" 
+  [loadingIcon]="loadingIcon" 
+  (filterTweets)="searchTweets($event)"></app-tweets-filter>
 
-  <table class="table img-thumbnail tweets__table">
-
-    <thead class="tweets__table-header">
-      <tr>
-        <th scope="col">Tweet</th>
-        <th scope="col">Likes</th>
-        <th scope="col">Replies</th>
-        <th scope="col">Retweets</th>
-        <th scope="col">Hashtags</th>
-        <th scope="col">Date</th>
-      </tr>
-    </thead>
-
-    <tbody class="tweets__table-body">
-      <tr *ngFor="let tweet of tweets">
-        <td scope="row">{{ tweet.text.length > 50 ? tweet.text.slice(0,50) + '...': tweet.text }}</td>
-        <td>{{ tweet.likes > 0 ? tweet.likes : '-' }}</td>
-        <td>{{ tweet.replies > 0 ? tweet.replies : '-' }}</td>
-        <td>{{ tweet.retweets > 0 ? tweet.retweets : '-' }}</td>
-        <td>{{ tweet.hashtags.slice(0, 2) + ' ' }}</td>
-        <td>{{ tweet.date | Date | date }}</td>
-      </tr>
-    </tbody>
-
-    <tfoot class="tweets__table-footer">
-      <tr *ngIf="searchValue === ''">
-        <td colspan="6">Please input a {{ searchKey | titlecase }}.</td>
-      </tr>
-      <tr *ngIf="tweetsList && tweetsSize === 0 && loadingTweets === false && searchValue !== ''">
-        <td colspan="6">No Tweets Found.</td>
-      </tr>
-    </tfoot>
-
-    <div *ngIf="tweetsSize > 10" class="d-flex justify-content-between p-2">
-      <ngb-pagination [ellipses]="false" [collectionSize]="tweetsSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="paginate($event)">
-      </ngb-pagination>
-    </div>
-
-  </table>
+  <app-tweets-table
+  [tabId]="tabId" 
+  [searchValue]="searchValue"
+  [loadingIcon]="loadingIcon"
+  [tweetsList]="tweetsList"></app-tweets-table>
 
 </section>

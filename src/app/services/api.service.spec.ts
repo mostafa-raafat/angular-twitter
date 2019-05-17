@@ -20,10 +20,10 @@ describe('Service: Api', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should call getProducts', async(() => {
+  it('should call getTweets', async(() => {
     spyOn(httpClient, 'get').and.returnValue(of(2));
     const service: ApiService = TestBed.get(ApiService);
-    service.getProducts().subscribe(
+    service.getTweets('user', 'mostafa').subscribe(
       result => expect(result).toEqual(2),
       fail
     );

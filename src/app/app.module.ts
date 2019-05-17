@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { TweetsComponent } from './components/tweets/tweets.component';
 import { ApiService } from './services/api.service';
 import { DatePipe } from './Pipes/Date.pipe';
+import { TweetsTableComponent } from './components/tweets-table/tweets-table.component';
+import { TweetsFilterComponent } from './components/tweets-filter/tweets-filter.component';
 
 
 
@@ -16,6 +18,8 @@ import { DatePipe } from './Pipes/Date.pipe';
   declarations: [
     AppComponent,
     TweetsComponent,
+    TweetsTableComponent,
+    TweetsFilterComponent,
     DatePipe
   ],
   imports: [

@@ -29,13 +29,13 @@ export class ApiService {
   /**
    *  Get tweets by user or hashtag
    *
-   * @param {string} key
+   * @param {string} tabId
    * @param {string} value
    * @returns {Observable<any>}
    * @memberof ApiService
    */
-  getTweets(key: string, value: string): Observable<any> {
-    return this.httpClient.get(this.url + key + 's/' + value, this.httpOptions);
+  getTweets(tabId: string, value: string): Observable<any> {
+    return this.httpClient.get(this.url + tabId + 's/' + value, this.httpOptions);
   }
 
 }

@@ -4,61 +4,6 @@
 
 .tweets {
 
-
-
-  .tweets__table {
-    border: none;
-    border-radius: 0;
-    -webkit-box-shadow: 0px 2px 0px 0px #dedede;
-    -moz-box-shadow: 0px 2px 0px 0px #dedede;
-    box-shadow: 0px 2px 0px 0px #dedede;
-
-    &-header {
-      border-bottom: 1px solid #dee2e6;
-
-      th {
-        border: none;
-        color: #8c8989;
-        font-weight: 500;
-      }
-    }
-
-    &-body td {
-      padding-top: 25px;
-      padding-bottom: 25px;
-      vertical-align: middle;
-      border-bottom: 1px solid #dee2e6;
-      border-top: 0;
-    }
-
-    &-footer td {
-      padding-top: 25px;
-      padding-bottom: 25px;
-      vertical-align: middle;
-      text-align: center;
-    }
-
-  }
 }
 
-/******************************************
- *     Style Angular Bootstrap Table     *
-*****************************************/
 
-
-::ng-deep .page-item {
-  padding: 7px;
-}
-
-::ng-deep .page-link {
-  color: #000000;
-}
-
-::ng-deep .disabled {
-  display: none;
-}
-
-::ng-deep .page-item:last-child .page-link,
-::ng-deep.page-item:first-child .page-link {
-  border-radius: 0;
-}
