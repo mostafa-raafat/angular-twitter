@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  public tabId: string = 'hashtag';
+  public tabId = 'hashtag';
 
-  constructor() { };
+  constructor() { }
 
-  public tabChanged(index: any): void{
+  public tabChanged(index: any): void {
       this.tabId = index.nextId;
   }
 

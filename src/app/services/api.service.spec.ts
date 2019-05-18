@@ -16,14 +16,14 @@ describe('Service: Api', () => {
     httpClient = TestBed.get(HttpClient);
   });
 
-  it('should create', inject([ApiService], (service: ApiService) => {
+  it('should create api service.', inject([ApiService], (service: ApiService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should call getTweets', async(() => {
+  it('should call getTweets.', async(() => {
     spyOn(httpClient, 'get').and.returnValue(of(2));
     const service: ApiService = TestBed.get(ApiService);
-    service.getTweets('user', 'mostafa').subscribe(
+    service.getTweets('user', 'twitter').subscribe(
       result => expect(result).toEqual(2),
       fail
     );

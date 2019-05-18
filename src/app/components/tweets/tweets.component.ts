@@ -37,6 +37,7 @@ export class TweetsComponent implements OnDestroy {
         this.tweetsList = this.exactMatch(list, this.tabId);
       });
     } else {
+      this.loadingIcon = false;
       this.tweetsList = [];
     }
   }

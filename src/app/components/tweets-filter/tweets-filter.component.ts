@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tweets-filter',
@@ -10,12 +11,12 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 })
 export class TweetsFilterComponent implements OnInit, OnDestroy {
 
-  @ViewChild('searchInput') searchInput: ElementRef;
   @Output() filterTweets: EventEmitter<string> = new EventEmitter();
   @Input() tabId: string;
   @Input() loadingIcon: boolean;
 
   public searchValue = '';
+  public searchControl = new FormControl();
 
   private filterSubscription: Subscription;
 
@@ -27,16 +28,19 @@ export class TweetsFilterComponent implements OnInit, OnDestroy {
    * @memberof TweetsFilterComponent
    */
   ngOnInit() {
-    this.filterSubscription = fromEvent(this.searchInput.nativeElement, 'keyup')
+    this.filterSubscription = this.searchControl.valueChanges
     .pipe(
       // Time in milliseconds between key events.
-      debounceTime(1000),
+      debounceTime(500),
       // If previous query is different from current.
-      distinctUntilChanged(),
-      // Get search input.
-      map((search: any) => search.target.value)
-      // subscription for response
-    ).subscribe((text: string) => this.filterTweets.emit(text));
+      distinctUntilChanged())
+    .subscribe((newValue: string) => {
+      this.searchValue = newValue;
+      // don't emit value if it equal to #
+      if (!(this.tabId === 'hashtag' && newValue === '#')) {
+        this.filterTweets.emit(newValue);
+      }
+    });
   }
 
   /**
