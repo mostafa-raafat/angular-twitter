@@ -14,6 +14,20 @@ describe('TweetsComponent', () => {
   let component: TweetsComponent;
   let fixture: ComponentFixture<TweetsComponent>;
 
+  const tweets = [{
+    account: {
+      fullname: 'mostafa',
+      href: '/mostafa',
+      id: 1,
+    },
+    date: '1/1/2019',
+    hashtags: ['mostafa'],
+    likes: 1,
+    replies: 2,
+    retweets: 3,
+    text: 'mostafa',
+  }];
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TweetsComponent, DatePipe],
@@ -36,6 +50,10 @@ describe('TweetsComponent', () => {
   });
 
   it('should create tweets component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should call exactHashtagMatching when tab id = hashtag', () => {
     expect(component).toBeTruthy();
   });
 

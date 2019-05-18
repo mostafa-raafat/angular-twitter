@@ -42,7 +42,7 @@ export class TweetsTableComponent {
    */
   paginate(page: number): void {
     if (this.tweetsSize > 0) {
-      this.tweets =  this.tweetsList.slice((page - 1) * this.pageSize, (page - 1) * this.pageSize + this.pageSize);
+      this.tweets = this.tweetsList.slice((page - 1) * this.pageSize, (page - 1) * this.pageSize + this.pageSize);
     } else {
       this.tweets = [];
     }

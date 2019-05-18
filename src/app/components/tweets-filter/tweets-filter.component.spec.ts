@@ -33,25 +33,25 @@ describe('TweetsFilterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set filterSubscription on ngOnInit', fakeAsync(() => {
-    const enterSpy = spyOn(component.filterTweets, 'emit').and.callThrough();
-    const input = fixture.debugElement.nativeElement.querySelector('#search');
-    component.ngOnInit();
-    setInputValue('#search', 'Tommy');
-    tick(1000);
-    fixture.detectChanges();
-    expect(component.searchValue).toEqual('Tommy');
-    expect(enterSpy).toHaveBeenCalled();
-  }));
+  // it('should set filterSubscription on ngOnInit', fakeAsync(() => {
+  //   const enterSpy = spyOn(component.filterTweets, 'emit').and.callThrough();
+  //   const input = fixture.debugElement.nativeElement.querySelector('#search');
+  //   component.ngOnInit();
+  //   setInputValue('#search', 'Tommy');
+  //   tick(1000);
+  //   fixture.detectChanges();
+  //   expect(component.searchValue).toEqual('Tommy');
+  //   expect(enterSpy).toHaveBeenCalled();
+  // }));
 
-  // must be called from within fakeAsync due to use of tick()
-  function setInputValue(selector: string, value: string) {
-    fixture.detectChanges();
-    tick();
+  // // must be called from within fakeAsync due to use of tick()
+  // function setInputValue(selector: string, value: string) {
+  //   fixture.detectChanges();
+  //   tick();
 
-    let input = fixture.debugElement.query(By.css(selector)).nativeElement;
-    input.value = value;
-    input.dispatchEvent(new Event('input'));
-    tick();
-  }
+  //   let input = fixture.debugElement.query(By.css(selector)).nativeElement;
+  //   input.value = value;
+  //   input.dispatchEvent(new Event('input'));
+  //   tick();
+  // }
 });

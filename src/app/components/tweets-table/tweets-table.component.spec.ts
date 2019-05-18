@@ -1,23 +1,23 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement, SimpleChange } from '@angular/core';
+import { DebugElement, SimpleChange, SimpleChanges } from '@angular/core';
 
 import { TweetsTableComponent } from './tweets-table.component';
 import { TweetsComponent } from '../tweets/tweets.component';
 import { NgbPaginationModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from 'src/app/Pipes/Date.pipe';
 
-fdescribe('TweetsTableComponent', () => {
+describe('TweetsTableComponent', () => {
   let component: TweetsTableComponent;
   let fixture: ComponentFixture<TweetsTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TweetsTableComponent, DatePipe ],
-      imports: [ NgbPaginationModule, NgbTabsetModule]
+      declarations: [TweetsTableComponent, DatePipe],
+      imports: [NgbPaginationModule, NgbTabsetModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -30,9 +30,31 @@ fdescribe('TweetsTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should call paginate on ngOnChange', () => {
-    const paginateSpy = spyOn(component, 'paginate').and.callThrough();
-    component.ngOnChanges({prop1:  new SimpleChange('x', 'y', true)});
-    expect(paginateSpy).toHaveBeenCalled();
+  it('should call paginate on ngOnChange', () => {
+    const tweetsList: SimpleChanges = {
+      tweetsList: {
+        previousValue: '',
+        currentValue: [{
+          account: {
+            fullname: 'mostafa',
+            href: '/mostafa',
+            id: 1,
+          },
+          date: '1/1/2019',
+          hashtags: ['mostafa'],
+          likes: 1,
+          replies: 2,
+          retweets: 3,
+          text: 'mostafa',
+        }],
+        firstChange: true,
+        isFirstChange: () => true
+      }
+    };
+    spyOn(component, 'paginate').and.callThrough();
+    component.ngOnChanges(tweetsList);
+    expect(component.tweetsSize).toEqual(1);
+    expect(component.tweetsList).toEqual(tweetsList.tweetsList.currentValue);
+    expect(component.paginate).toHaveBeenCalled();
   });
 });
