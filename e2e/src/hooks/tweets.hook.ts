@@ -8,7 +8,6 @@ const config = require('../../protractor.conf.js');
 setDefaultTimeout(5000);
 
 BeforeAll({ timeout: 100 * 1000 }, async () => {
-  await browser.get('http://localhost:4200/');
   const jsonReports = path.join(process.cwd(), '/e2e/src/reports/json');
   Reporter.createReporterFile(jsonReports);
 });

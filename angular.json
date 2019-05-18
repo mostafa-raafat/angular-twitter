@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects":
   {
-    "trufla":
+    "angular-twitter":
     {
       "root": "",
       "sourceRoot": "src",
@@ -24,7 +24,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options":
           {
-            "outputPath": "dist/trufla",
+            "outputPath": "dist/angular-twitter",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -74,13 +74,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options":
           {
-            "browserTarget": "trufla:build"
+            "browserTarget": "angular-twitter:build"
           },
           "configurations":
           {
             "production":
             {
-              "browserTarget": "trufla:build:production"
+              "browserTarget": "angular-twitter:build:production"
             }
           }
         },
@@ -89,7 +89,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options":
           {
-            "browserTarget": "trufla:build"
+            "browserTarget": "angular-twitter:build"
           }
         },
         "test":
@@ -130,7 +130,7 @@
         }
       }
     },
-    "trufla-e2e":
+    "angular-twitter-e2e":
     {
       "root": "e2e/",
       "projectType": "application",
@@ -143,13 +143,13 @@
           "options":
           {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "trufla:serve"
+            "devServerTarget": "angular-twitter:serve"
           },
           "configurations":
           {
             "production":
             {
-              "devServerTarget": "trufla:serve:production"
+              "devServerTarget": "angular-twitter:serve:production"
             }
           }
         },
@@ -167,5 +167,5 @@
       }
     }
   },
-  "defaultProject": "trufla"
+  "defaultProject": "angular-twitter"
 }

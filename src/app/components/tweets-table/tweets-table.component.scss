@@ -1,3 +1,5 @@
+@import '../../../_vars';
+
 /******************************************
  *      Style Tweets Table Component     *
 *****************************************/
@@ -56,4 +58,16 @@
 ::ng-deep .page-item:last-child .page-link,
 ::ng-deep.page-item:first-child .page-link {
   border-radius: 0;
+}
+
+::ng-deep .page-item:last-child .page-link:after {
+  content: ">";
+}
+
+::ng-deep .page-item .page-link span {
+  display: none;
+}
+
+::ng-deep .page-item:first-child .page-link:after {
+  content: "<";
 }

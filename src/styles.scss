@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '_vars';
 
 html,
 body {
@@ -12,21 +13,21 @@ body {
 
 
 input::-webkit-input-placeholder {
-    color: #fff;
+    color: $white;
     font-size: 15px;
 }
 
 input::-moz-placeholder {
-    color: #adadad;
+    color: $input-color;
     font-size: 15px;
 }
 
 input:-ms-input-placeholder {
-    color: #adadad;
+    color: $input-color;
     font-size: 15px;
 }
 
 input::placeholder {
-    color: #fff;
+    color: $white;
     font-size: 15px;
 }

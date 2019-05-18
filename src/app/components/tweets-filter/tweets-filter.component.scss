@@ -1,3 +1,5 @@
+@import '../../../_vars';
+
 /******************************************
  *     Style Tweets Search Component     *
 *****************************************/
@@ -9,7 +11,7 @@
     display: block;
     width: 150px;
     padding: 0;
-    color: #8c8989;
+    color: $label-color;
     margin-bottom: 0.2rem;
   }
 
@@ -35,7 +37,7 @@
     button {
       width: 50px;
       border-radius: 0;
-      background: #fff;
+      background: $white;
 
       &:hover {
         cursor: default;
@@ -46,7 +48,7 @@
       }
 
       .fa-search {
-        color: #cecece;
+        color: $search-icon;
       }
     }
   }

@@ -17,7 +17,7 @@
       <td>{{ tweet.likes > 0 ? tweet.likes : '-' }}</td>
       <td>{{ tweet.replies > 0 ? tweet.replies : '-' }}</td>
       <td>{{ tweet.retweets > 0 ? tweet.retweets : '-' }}</td>
-      <td>{{ tweet.hashtags.slice(0, 2) + ' ' }}</td>
+      <td>{{ tweet.hashtags.slice(0, 2).join(', ') }}</td>
       <td>{{ tweet.date | Date | date }}</td>
     </tr>
   </tbody>
@@ -33,7 +33,7 @@
 
   <div *ngIf="tweetsSize > 10" class="d-flex justify-content-between p-2">
     <ngb-pagination [ellipses]="false" [collectionSize]="tweetsSize" [(page)]="page" [pageSize]="pageSize"
-      (pageChange)="paginate($event)">
+      (pageChange)="paginate($event)" [boundaryLinks]="true" [directionLinks]="false">
     </ngb-pagination>
   </div>
 
