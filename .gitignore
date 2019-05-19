@@ -18,7 +18,7 @@ speed-measure-plugin.json
 /.idea
 .project
 .classpath
-.vscode
+/.vscode
 .c9/
 *.launch
 .settings/
