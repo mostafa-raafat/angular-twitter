@@ -35,10 +35,15 @@ export class TweetsFilterComponent implements OnInit, OnDestroy {
       // If previous query is different from current.
       distinctUntilChanged())
     .subscribe((newValue: string) => {
-      this.searchValue = newValue;
+      // adding # if user forget to add it.
+      if (this.tabId === 'hashtag' && !newValue.startsWith('#') && newValue.length > 1) {
+        this.searchValue = '#' + newValue;
+      } else {
+        this.searchValue = newValue;
+      }
       // don't emit value if it equal to #
-      if (!(this.tabId === 'hashtag' && newValue === '#')) {
-        this.filterTweets.emit(newValue);
+      if (!(this.tabId === 'hashtag' && this.searchValue === '#')) {
+        this.filterTweets.emit(this.searchValue);
       }
     });
   }

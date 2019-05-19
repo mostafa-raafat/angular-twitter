@@ -30,6 +30,7 @@ export class TweetsTableComponent {
     if (changes.tweetsList) {
       this.tweetsSize = changes.tweetsList.currentValue.length;
       this.tweetsList = changes.tweetsList.currentValue;
+      this.page = 1;
       this.paginate(this.page);
     }
   }

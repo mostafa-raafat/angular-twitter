@@ -4,7 +4,7 @@
   </label>
   <div class="input-group col-sm-6 col-md-4 tweets__search-input">
     <input type="text" id="search" class="form-control py-2 border-right-0 border"
-      placeholder="Search by {{ tabId | titlecase }}" autocomplete="off" [formControl]="searchControl">
+      placeholder="Search by {{ tabId | titlecase }}" autocomplete="off" [value]="searchValue" [formControl]="searchControl">
     <span class="input-group-append tweets__search-icon">
       <button class="btn btn-outline-secondary border-left-0 border" type="button">
         <i class="fa fa-search" *ngIf="searchValue === '' || loadingIcon === false"></i>
