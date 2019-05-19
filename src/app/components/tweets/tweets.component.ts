@@ -32,9 +32,13 @@ export class TweetsComponent implements OnDestroy {
     this.loadingIcon = true;
     if (value !== '') {
       this.tweetsSubscription = this.api.getTweets(this.tabId, this.removeHash(this.searchValue))
-      .subscribe((list: any) => {
+      .subscribe((list: Tweet[]) => {
         this.loadingIcon = false;
         this.tweetsList = this.exactMatch(list, this.tabId);
+      }, error => {
+        this.loadingIcon = false;
+        this.tweetsList = [];
+        console.log('oops', error);
       });
     } else {
       this.loadingIcon = false;
